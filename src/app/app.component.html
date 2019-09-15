@@ -4,7 +4,7 @@
 		mat-icon-button>
 		<mat-icon
 			(click)="sidenav.toggle()">
-			menu
+			{{sidenav.opened ? 'menu_open' : 'menu'}}
 		</mat-icon>
 	</button>
 	<span>Responsive Navigation</span>
@@ -14,16 +14,23 @@
 		#sidenav
 		[mode]="isMobile? 'over' : 'side'"
 		[opened]="!isMobile">
-		<div
-			class="menu"
-			style="overflow-y: auto;">
+		<mat-nav-list>
 			<a
 				*ngFor="let item of items"
-				mat-button> {{item}}
-			</a>			
-		</div>
+				mat-list-item
+				[routerLink]="[item.route]"
+				routerLinkActive="list-item-active">
+				<mat-icon
+					*ngIf="item.icon"
+					matListIcon
+					class="app-nav-list-icon">
+					{{item.icon}}
+				</mat-icon>
+				{{item.title}}
+			</a>
+		</mat-nav-list>
 	</mat-sidenav>
 	<mat-sidenav-content>
-		Main content
+		<router-outlet></router-outlet>
 	</mat-sidenav-content>
 </mat-sidenav-container>

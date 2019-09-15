@@ -11,15 +11,27 @@ import {
 	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-	items = [...Array(100).keys()].map((item => `item ${item}`));
 	isMobile:boolean = true;
+	items = [
+		{
+			title:'Dashboard',
+			route:'dashboard',
+			icon:'dashboard'
+		},
+		{
+			title:'Pokemons',
+			route:'pokemons',
+			icon:'list'
+		}
+	];
+
 	ngOnInit(){
 		this.bpo.observe('(max-width: 600px)').subscribe((state) => {
-			this.isMobile = state.matches
+			this.isMobile = state.matches;
 		})
 	}
+
 	constructor(
 		private bpo: BreakpointObserver) {
-		
 	}
 }

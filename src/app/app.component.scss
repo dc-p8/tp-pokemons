@@ -8,8 +8,6 @@ mat-sidenav-container {
     }
 }
 
-.menu{
-  min-width:10em;
-  display: flex;
-  flex-direction: column;
+mat-nav-list{
+  min-width: 10em;
 }
