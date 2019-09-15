@@ -1,6 +1,8 @@
 <div class="preview"
     *ngFor="let pokemon of pokemons">
-    <mat-card >
+    <mat-card
+        (click)="Select(pokemon)"
+        [class.selected-card]="selectedPokemons[pokemon.id]">
         <mat-card-header>
             <mat-card-title>{{pokemon.name}}</mat-card-title>
         </mat-card-header>
@@ -12,3 +14,4 @@
         </mat-card-content>
     </mat-card>
 </div>
+

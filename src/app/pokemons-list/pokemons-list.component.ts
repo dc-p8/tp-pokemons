@@ -9,13 +9,24 @@ import { PokemonPreview } from '../models/pokemon-preview';
 	styleUrls: ['./pokemons-list.component.scss']
 })
 export class PokemonsListComponent implements OnInit {
+	selectedPokemons = {};
 	pokemons:PokemonPreview[];	
 	
+	Select(selectedPokemon:PokemonPreview){
+		this.pokemonService.togglePokemonSelected(selectedPokemon);
+	}
 	constructor(private pokemonService:PokemonsService) { }
 	
 	ngOnInit() {
 		this.pokemonService.GetAll().subscribe((pokemons) => {
 			this.pokemons = pokemons;
+		})
+		this.pokemonService.selectedPokemons$.subscribe((selectedPokemons) => {
+			this.selectedPokemons = selectedPokemons.reduce((acc, current) => {
+				acc[current] = true;
+				return acc;
+			}, {});
+			console.log(this.selectedPokemons);
 		})
 	}
 	

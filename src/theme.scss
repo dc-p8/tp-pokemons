@@ -15,3 +15,6 @@ $theme: mat-light-theme($primary, $accent, $warn);
   font-weight: bold;
   color: mat-color($accent, darker) !important;
 }
+.selected-card{
+    background-color: mat-color($primary);
+}

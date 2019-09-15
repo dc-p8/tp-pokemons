@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Pokemon } from '../models/pokemon-details';
-import { Observable } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { PokemonPreview } from '../models/pokemon-preview';
 
@@ -9,6 +9,19 @@ import { PokemonPreview } from '../models/pokemon-preview';
 	providedIn: 'root'
 })
 export class PokemonsService {
+	selectedPokemons = new BehaviorSubject<number[]>([]);
+	selectedPokemons$ = this.selectedPokemons.asObservable();
+
+	togglePokemonSelected(pokemonPreview:PokemonPreview){
+		let newSelectedPokemons = this.selectedPokemons.value.filter((alreadySelectedPokemon) => {
+			return alreadySelectedPokemon != pokemonPreview.id;
+		});
+		if(newSelectedPokemons.length == this.selectedPokemons.value.length){
+			newSelectedPokemons = [...newSelectedPokemons, pokemonPreview.id]; 	
+		}
+		this.selectedPokemons.next(newSelectedPokemons);
+	}
+
 	cachedPokemons:PokemonPreview[] = null;
 	GetAll():Observable<PokemonPreview[]>{
 		if(this.cachedPokemons)

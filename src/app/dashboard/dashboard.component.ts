@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PokemonsService } from '../pokemons-service/pokemons.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  selectedPokemons:number[];
 
-  constructor() { }
+  constructor(private pokemonsService:PokemonsService) { }
 
   ngOnInit() {
+    this.pokemonsService.selectedPokemons$.subscribe((selectedPokemons) => {
+      this.selectedPokemons = selectedPokemons;
+    })
   }
 
 }
