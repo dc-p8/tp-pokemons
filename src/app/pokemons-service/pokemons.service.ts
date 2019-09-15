@@ -9,12 +9,12 @@ import { PokemonPreview } from '../models/pokemon-preview';
 	providedIn: 'root'
 })
 export class PokemonsService {
+	cachedPokemons:PokemonPreview[] = null;
 	GetAll():Observable<PokemonPreview[]>{
+		if(this.cachedPokemons)
+			return of(this.cachedPokemons);
 		return (this.http.get('assets/pokedex.json') as Observable<any[]>)
 		.pipe(
-			tap(pokemons => {
-				console.log(pokemons)
-			}),
 			map((pokemons) => {
 				return pokemons.map((pokemonJson) => {
 					let padId = `000${pokemonJson.id}`.slice(-3)
@@ -25,6 +25,9 @@ export class PokemonsService {
 					} as PokemonPreview;
 					return pokemon;
 				});
+			}),
+			tap((pokemons) => {
+				this.cachedPokemons = pokemons;
 			})
 		)
 	}
