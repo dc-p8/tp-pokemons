@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PokemonsComponent } from './pokemons/pokemons.component';
+import { PokemonsListComponent } from './pokemons-list/pokemons-list.component';
 
 
 const routes: Routes = [
@@ -19,7 +19,7 @@ const routes: Routes = [
 	},
 	{
 		path:'pokemons',
-		component:PokemonsComponent,
+		component:PokemonsListComponent,
 		data: {
 			title: "Pokemons list"
 		},

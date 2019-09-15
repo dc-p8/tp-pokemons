@@ -6,17 +6,20 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { PokemonsComponent } from './pokemons/pokemons.component';
+import { PokemonsListComponent } from './pokemons-list/pokemons-list.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    PokemonsComponent
+    PokemonsListComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    
     MaterialModule,
   ],
   providers: [],

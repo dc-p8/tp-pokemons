@@ -1,0 +1,16 @@
+:host{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.preview{
+    margin: 0.5em;
+    // padding:0.5em;
+    display: block;
+    .thumbnail{
+        width: 10em;
+        height: auto;
+    }
+    
+}
