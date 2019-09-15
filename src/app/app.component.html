@@ -7,7 +7,7 @@
 			{{sidenav.opened ? 'menu_open' : 'menu'}}
 		</mat-icon>
 	</button>
-	<span>Responsive Navigation</span>
+	<span>{{dynamicTitleService.$title | async}}</span>
 </mat-toolbar>
 <mat-sidenav-container>
 	<mat-sidenav

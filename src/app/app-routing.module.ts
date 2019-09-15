@@ -13,10 +13,16 @@ const routes: Routes = [
 	{
 		path:'dashboard',
 		component:DashboardComponent,
+		data: {
+			title: "Dashboard"
+		},
 	},
 	{
 		path:'pokemons',
 		component:PokemonsComponent,
+		data: {
+			title: "Pokemons list"
+		},
 	}
 ];
 

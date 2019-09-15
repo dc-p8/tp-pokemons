@@ -4,6 +4,7 @@ import {
 import {
 	BreakpointObserver
 } from '@angular/cdk/layout';
+import { DynamicTitleService } from './dynamic-title.service';
 
 @Component({
 	selector: 'app-root',
@@ -28,10 +29,11 @@ export class AppComponent implements OnInit{
 	ngOnInit(){
 		this.bpo.observe('(max-width: 600px)').subscribe((state) => {
 			this.isMobile = state.matches;
-		})
+		});
 	}
 
 	constructor(
-		private bpo: BreakpointObserver) {
+		private bpo: BreakpointObserver,
+		public dynamicTitleService:DynamicTitleService) {
 	}
 }
