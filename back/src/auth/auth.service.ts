@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException, Scope } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { Login } from '../users/models/login';
@@ -10,26 +10,24 @@ export class AuthService {
         private readonly jwtService: JwtService
     ) { }
 
-    public async login(user: Login): Promise< any | { status: number }>{
-        let userData = await this.userService.find(user.pseudo);
-        if(!userData){
-            throw new NotFoundException('')
+    async validateUser(pseudo: string, pass: string): Promise<any> {
+        const user = await this.userService.find(pseudo);
+        if (user && user.passwordHash === pass) {
+          return user;
         }
-        if(userData.passwordHash != user.password){
-            throw new UnauthorizedException();
-        }
-        let payload =  {
-        }
-        const token = this.jwtService.sign(payload, {
-            expiresIn:60,
-            subject:userData.pseudo
-        });
-
-        return token;
+        return null;
     }
 
-    // public async register(user: User): Promise<any>{
-    //     return this.userService.create(user)
-    // } 
+    public async login(user: Login){
+        let payload =  {
+            //sub:user.pseudo
+        }
 
+        return {
+            access_token:this.jwtService.sign(payload, {
+                expiresIn:60,
+                subject:user.pseudo
+            })
+        };
+    }
 }
