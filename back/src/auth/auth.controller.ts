@@ -11,10 +11,4 @@ export class AuthController {
     async Login(@Req() request){
         return await this.authService.login(request.user);
     }
-
-    @UseGuards(AuthGuard('jwt'))
-    @Get('protected')
-    getProtected(@Request() req){
-        return 'this content is protected';
-    }
 }
